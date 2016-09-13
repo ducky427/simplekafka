@@ -5,8 +5,8 @@
   (:import (java.io ByteArrayInputStream))
   (:gen-class))
 
-(def config {"zookeeper.connect" "192.168.64.101:2181/kafka"
-             "group.id" "alex"
+(def config {"zookeeper.connect" "localhost:2181"
+             "group.id" "simplekafka.consume"
              "auto.offset.reset" "smallest"
              "auto.commit.enable" "false"})
 
@@ -20,5 +20,5 @@
   [& args]
   (cc/with-resource [c (cz/consumer config)]
     cz/shutdown
-    (println (count
-              (map transit-decode (take 1000 (cz/messages c "test-data")))))))
+    (time (count
+              (map transit-decode (take 50000 (cz/messages c "test-data")))))))

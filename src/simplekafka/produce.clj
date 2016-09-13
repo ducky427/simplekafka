@@ -40,7 +40,7 @@
                  (np/byte-array-serializer)
                  (np/byte-array-serializer))]
     (println "publishing messages")
-    (dotimes [_ 100]
+    (dotimes [_ 50000]
       @(np/send p (np/record topic-name input-record)))))
 
 (def row-data {:AAAAAAA 1
